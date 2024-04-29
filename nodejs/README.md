@@ -1,5 +1,5 @@
 # Hello World NodeJs
-![Toolbox](img/toolbox-playground.png)
+![Toolbox](../img/toolbox-playground.png)
 
 ## Uso local
 Para usar o projeto Hello World Node.js, siga estas etapas:
