@@ -6,7 +6,7 @@
 Um repositório com "Hello World" nas seguintes linguagens usando Docker:
 
 1. [NodeJs](./nodejs/README.md)
-2. Python
+2. [Python](./python/README.md)
 3. .Net
 4. Java
 5. Go
