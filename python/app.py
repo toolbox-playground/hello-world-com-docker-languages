@@ -7,4 +7,4 @@ def hello_world():  # Defina uma função para lidar com a requisição da URL r
     return 'Bem-Vindo ao Hello World Flask Python'  # Retorne a string "Hello, World!" como resposta
 
 if __name__ == '__main__':  # Verifique se o script está sendo executado diretamente (não importado)
-    app.run()  # Inicie a aplicação Flask
+    app.run(host="127.0.0.1", port=5000, debug=True) # Inicie a aplicação Flask
