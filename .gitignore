@@ -1,2 +1,4 @@
-node_modules/
-venv/
+nodejs/node_modules/
+python/venv/
+dotnet/bin/
+dotnet/obj/
