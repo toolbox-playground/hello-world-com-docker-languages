@@ -1,5 +1,0 @@
-/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/bin/Release/net8.0/publish/dotnet
-/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/bin/Release/net8.0/publish/dotnet.dll
-/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/bin/Release/net8.0/publish/dotnet.deps.json
-/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/bin/Release/net8.0/publish/dotnet.runtimeconfig.json
-/media/marcelo/HDD/htdocs/toolbox/hello-world-com-docker-languages/dotnet/bin/Release/net8.0/publish/dotnet.pdb
