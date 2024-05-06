@@ -1,15 +1,30 @@
-# Hello World Java
+# Hello World Java com Docker
 ![Toolbox](../img/toolbox-playground.png)
 
-## Uso local
-Para usar o projeto Hello World Java, siga estas etapas:
+## Uso Local
 
-1. Certifique-se de ter a versão atual do Java instalado em sua máquina. Você pode baixar e instalar o Java a partir do site oficial: [https://www.java.com/en/download/help/download_options.html](https://www.java.com/en/download/help/download_options.html). 
+Para usar o projeto Hello World Java com Docker, siga estes passos:
 
-2. Certifique-se que você está dentro do diretório `hello-world-languages/java`.
+1. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
-3. Rode o projeto:
-    ```bash
-    java hello.java
+2. Clone este repositório para sua máquina local através do comando abaixo:
     ```
-4. Abra seu navegador e visite `http://localhost:8080` para ver a mensagem "Bem-Vindo ao Hello World Java da ToolBox Playground".
+    git clone https://github.com/toolbox-playground/hello-world-com-docker-languages.git
+    ```
+
+3. Abra o terminal ou prompt de comando e navegue até o diretório que você acabou de clonar.
+   ```
+    cd hello-world-com-docker-languages/java
+   ```
+4. Construa a imagem Docker:
+    ```bash
+    docker build -t hello-world-java .
+    ```
+    Obs.: Certifique-se que seu Docker está rodando.
+
+5. Execute o contêiner Docker:
+    ```bash
+    docker run -p 8080:8080 hello-world-java
+    ```
+
+6. Abra seu navegador e visite `http://localhost:8080` para ver a mensagem "Bem-Vindo ao Hello World Go da ToolBox Playground".
