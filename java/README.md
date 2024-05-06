@@ -12,3 +12,4 @@ Para usar o projeto Hello World Java, siga estas etapas:
     ```bash
     java hello.java
     ```
+4. Abra seu navegador e visite `http://localhost:8080` para ver a mensagem "Bem-Vindo ao Hello World Java da ToolBox Playground".
