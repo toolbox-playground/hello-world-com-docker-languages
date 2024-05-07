@@ -1,5 +1,5 @@
 # Use a imagem base do OpenJDK
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-alpine
 
 # Defina o diretório de trabalho dentro do contêiner
 WORKDIR /app
