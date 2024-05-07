@@ -24,7 +24,7 @@ Para usar o projeto Hello World Python com Docker, siga estes passos:
 
 5. Execute o contêiner Docker:
     ```bash
-    docker run -p 5000:5000 hello-world-python
+    docker run -p 5001:5000 hello-world-python
     ```
 
-6. Abra seu navegador e visite `http://localhost:5000` para ver a mensagem "Bem-Vindo ao Hello World Flask Python".
+6. Abra seu navegador e visite `http://localhost:5001` para ver a mensagem "Bem-Vindo ao Hello World Flask Python". Evite usar a porta 5000 no seu host ou computador pois outras aplicações podem estar rodando em paralelo utilizando a mesma porta.
