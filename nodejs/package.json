@@ -1,7 +1,7 @@
 {
   "name": "node-image",
   "version": "1.0.0",
-  "description": "Created for autoavaliar-examples node-js functions",
+  "description": "Criado para o propósito de compartilhar conhecimentos e exemplos práticos",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
