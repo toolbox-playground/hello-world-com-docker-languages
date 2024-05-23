@@ -29,7 +29,6 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       env:
-        # Adicione aqui no arquivo yaml do GH actions o username e senha do Docker Hub.
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
       run: |
