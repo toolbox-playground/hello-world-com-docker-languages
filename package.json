@@ -1,0 +1,23 @@
+{
+  "name": "hello-world-com-docker-languages",
+  "version": "1.2.2",
+  "description": "![Toolbox Playground](img/toolbox-playground.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "commit-and-tag-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toolbox-playground/hello-world-com-docker-languages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toolbox-playground/hello-world-com-docker-languages/issues"
+  },
+  "homepage": "https://github.com/toolbox-playground/hello-world-com-docker-languages#readme",
+  "dependencies": {
+    "commit-and-tag-version": "^12.4.1"
+  }
+}
