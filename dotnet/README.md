@@ -17,7 +17,7 @@ Para usar o projeto Hello World .Net com Docker, siga estes passos:
 
 4. Execute o contêiner Docker:
     ```bash
-    docker run -p 8081:8080 hello-world-dotnet
+    docker run -d -p 8081:8080 hello-world-dotnet
     ```
 
 5. Abra seu navegador e visite `http://localhost:8081` para ver a mensagem "Bem-Vindo ao Hello World .Net Asp da ToolBox Playground".
