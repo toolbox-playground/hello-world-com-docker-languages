@@ -1,0 +1,18 @@
+name: Security Check with GitLeaks
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  gitleaks-scan:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout do repositório  
+        uses: actions/checkout@v4 
+        with:
+          fetch-depth: 0
+
+      - name: Executar o GitLeaks com Docker  
+        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v 
