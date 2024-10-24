@@ -6,7 +6,8 @@ on:
       - 'CHANGELOG.md'
       - 'package.json'
       - 'package-lock.json'
-
+    tags-ignore:
+      - '*'   
   workflow_dispatch:  
 
 jobs:
