@@ -1,0 +1,37 @@
+name: Dotnet CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'nodejs/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      working-directory: nodejs  # Ensure you are in the right directory
+      run: npm install
+
+    - name: Executar o GitLeaks com Docker  
+      run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path/nodejs" -v 
+        
+    - name: Build Docker image
+      run: |
+        cd nodejs
+        docker build -t nodejs-ci-cd .
+
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+        sudo mv ./bin/trivy /usr/local/bin/trivy  # Move Trivy to a location in the PATH
+  
+    - name: Run Trivy to scan Docker image for vulnerabilities
+      run: |
+        trivy image nodejs-ci-cd
