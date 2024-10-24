@@ -33,12 +33,9 @@ jobs:
       run: |
         # Extract the branch name from GITHUB_REF
         BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})
-        
-        # Construct the GitHub URL for the branch
-        REPO_URL="https://github.com/${{ github.repository }}/tree/$BRANCH_NAME"
-        
+
         pip install truffleHog
-        trufflehog github --repo=$REPO_URL
+        trufflehog github --repo=$BRANCH_NAME
         
     - name: Build Docker image
       run: |
