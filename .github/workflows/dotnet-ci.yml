@@ -21,18 +21,17 @@ jobs:
         curl https://sdk.cloud.google.com | bash
         PATH=$PATH:/root/google-cloud-sdk/bin
 
-    - name: Installing Google Cloud
+    - name: Installing Google Cloud and setting credentials
       run: |
-        cd dotnet
-        echo $GCP_JSON > ${{ github.workspace }}/dotnet/gcp.json
-        ls ${{ github.workspace }}
-        cat gcp.json | jq -c
-        export GOOGLE_CREDENTIALS=$(cat ${{ github.workspace }}/dotnet/gcp.json | jq -c )
-        export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
+          cd dotnet
+          echo $GCP_JSON > gcp.json
+          cat gcp.json | jq -c
+          export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
+          export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
 
-    - name: Installing Google Cloud
+    - name: Auth with Google Cloud (in correct directory)
+      working-directory: dotnet  # Ensure you are in the right directory
       run: |
-        cat ${{ github.workspace }}/dotnet/gcp.json
-        gcloud auth activate-service-account pipeline-onboarding@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=${{ github.workspace }}/dotnet/gcp.json
-        gcloud config set project toolbox-sandbox-388523
-        gcloud auth configure-docker
+          gcloud auth activate-service-account pipeline-onboarding@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
+          gcloud config set project toolbox-sandbox-388523
+          gcloud auth configure-docker
