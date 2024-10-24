@@ -2,12 +2,11 @@ name: NodeJS CD
 
 on:
   push:
-    paths:
-      - 'nodejs/**'
     paths-ignore:
       - 'CHANGELOG.md'
       - 'package.json'
       - 'package-lock.json'
+
   workflow_dispatch:  
 
 jobs:
