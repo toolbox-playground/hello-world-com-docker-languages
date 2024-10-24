@@ -1,0 +1,45 @@
+name: Dotnet CD
+
+on:
+  main:
+    branches:
+      - main
+    paths:
+      - 'dotnet/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET 8
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Install dependencies
+      run: dotnet restore ./dotnet
+
+    - name: Build .NET project
+      run: dotnet build --configuration Release ./dotnet
+
+    - name: Publish .NET project
+      run: dotnet publish --configuration Release --output ./dotnet/publish ./dotnet
+
+    - name: Run TruffleHog to scan for secrets
+      run: |
+        pip install truffleHog
+        trufflehog filesystem --directory=./dotnet
+
+    - name: Build Docker image
+      run: |
+        cd dotnet
+        docker build -t dotnet-ci-cd .
+
+    - name: Run Trivy to scan Docker image for vulnerabilities
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+        ./trivy image dotnet-ci-cd
