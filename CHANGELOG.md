@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.8.10 (2024-10-24)
+
+
+### Bug Fixes
+
+* versioning ([a44781a](https://github.com/toolbox-playground/hello-world-com-docker-languages/commit/a44781ac3249e6f929782b0c63ccba653562d05d))
+
 ## 1.8.9 (2024-10-24)
 
 ## 1.8.8 (2024-10-24)
