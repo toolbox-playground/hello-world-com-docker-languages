@@ -1,8 +1,5 @@
 name: Security Check with GitLeaks
-on:
-  push:
-    branches:
-      - main
+
 
 jobs:
   gitleaks-scan:
