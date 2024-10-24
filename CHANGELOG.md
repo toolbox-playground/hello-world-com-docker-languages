@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.6.0 (2024-10-24)
+
+
+### Features
+
+* adding versioning ([120cd1e](https://github.com/toolbox-playground/hello-world-com-docker-languages/commit/120cd1e8853bb10198a84460447c6ed7aa64c0b3))
+
 ## 1.5.3 (2024-10-24)
 
 ## 1.5.2 (2024-10-24)
