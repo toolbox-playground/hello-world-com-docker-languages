@@ -59,19 +59,64 @@ jobs:
       env:
         GCP_JSON: ${{ secrets.GCP_JSON }}
 
-  gcp:
-      name: versioning
+  test:
+      name: test
       runs-on: ubuntu-latest
       needs: build
       steps:
-        - name: Versioning
-          run: |
-              text=$(git log -1 --no-merges --pretty=%B)
-              echo $text
-              if [[ "$PR_TITLE" =~ (fix|patch|feature|feat) ]]; then
-                echo "MINOR"
-              elif [[ "$PR_TITLE" =~ "BREAKING CHANGE" ]]; then
-                echo "MAJOR"
-              else
-                echo "No version bump needed"
-              fi
+            - name: Install and Build
+              run: |
+                status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET https://dotnet-test-794011605223.us-central1.run.app/api/customers)
+                if [ "$status_code" -eq 200 ]; then
+                  echo "Function is up and running!";
+                else
+                  echo "Function test failed! Rolling back to the previous version...";
+                  # Execute the gcloud command and store the output in a variable
+                  output=$(gcloud run services describe flask-app --platform=managed --region=us-central1)
+  
+                  # Extract the latestRevision attribute value from the output using grep and awk
+                  latest_revision=$(echo "$output" | grep -oP 'latestRevision: \K\S+')
+  
+                  # Assign the latestRevision value to an environment variable
+                  export LATEST_REVISION=$latest_revision
+  
+                  # Display the value of the environment variable
+                  echo "Latest Revision: $LATEST_REVISION"
+                fi
+  versioning:
+      name: versioning
+      runs-on: ubuntu-latest
+      needs: test
+      steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                token: ${{ secrets.ACTIONS_TOKEN }}
+
+            - name: Install and Build
+              run: |
+                npm install
+
+            - name: Configuring Git Account
+              run: |
+                git config --global user.email "pipelines@toolboxdevops.cloud"
+                git config --global user.name "Toolbox Automation"
+
+            - name: Check commit message for specific keywords
+              run: |
+                text=$(git log -1 --no-merges --pretty=%B)
+                echo $text
+                if [[ $text =~ (fix|patch) ]]; then
+                  npm run release -- --release-as patch
+                  echo "{{ Patching Versioning }}"
+                elif [[ $text =~ (BREAKING\ CHANGE) ]]; then
+                  npm run release -- --release-as patch
+                  echo "{{ Major Versioning }}"
+                elif [[ $text =~ (feat) ]]; then
+                  echo "{{ Minor Versioning }}"
+                  npm run release -- --release-as minor
+                else
+                  npm run release -- --release-as patch
+                  echo {{ Default Patching Versioning }}
+                fi
+                git push --follow-tags origin main
