@@ -1,4 +1,4 @@
-name: Dotnet CD
+name: NodeJS CD
 
 on:
   push:
