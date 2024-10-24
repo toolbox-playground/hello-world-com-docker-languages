@@ -48,11 +48,35 @@ jobs:
       env:
         GCP_JSON: ${{ secrets.GCP_JSON }}
 
+  test:
+      name: test
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+            - name: Install and Build
+              run: |
+                status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET https://nodejs-test-794011605223.us-central1.run.app/)
+                if [ "$status_code" -eq 200 ]; then
+                  echo "Function is up and running!";
+                else
+                  echo "Function test failed! Rolling back to the previous version...";
+                  # Execute the gcloud command and store the output in a variable
+                  output=$(gcloud run services describe flask-app --platform=managed --region=us-central1)
+  
+                  # Extract the latestRevision attribute value from the output using grep and awk
+                  latest_revision=$(echo "$output" | grep -oP 'latestRevision: \K\S+')
+  
+                  # Assign the latestRevision value to an environment variable
+                  export LATEST_REVISION=$latest_revision
+  
+                  # Display the value of the environment variable
+                  echo "Latest Revision: $LATEST_REVISION"
+                fi
   versioning:
       name: versioning
       runs-on: ubuntu-latest
-      needs: build
-        steps:
+      needs: test
+      steps:
             - name: Checkout
               uses: actions/checkout@v3
               with:
