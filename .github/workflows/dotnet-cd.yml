@@ -56,7 +56,7 @@ jobs:
         GCP_JSON: ${{ secrets.GCP_JSON }}
 
   gcp:
-      name: Google Cloud Deploy
+      name: versioning
       runs-on: ubuntu-latest
       needs: build
       steps:
