@@ -25,9 +25,6 @@ jobs:
       run: |
           cd dotnet
           echo ${{ secrets.GCP_JSON }} > gcp.json
-          cat <<EOF > gcp.json
-          $GCP_JSON
-          EOF
           export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
           export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
           echo "GOOGLE_CREDENTIALS: $GOOGLE_CREDENTIALS"
@@ -35,11 +32,7 @@ jobs:
 
     - name: Installing Google Cloud and setting credentials
       run: |
-          cd dotnet
           echo $GCP_JSON > gcp.json
-          cat <<EOF > gcp.json
-          $GCP_JSON
-          EOF
           export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
           export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
           echo "GOOGLE_CREDENTIALS: $GOOGLE_CREDENTIALS"
