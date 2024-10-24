@@ -63,9 +63,8 @@ jobs:
     
     - name: Installing Google Cloud
       run: |
-        cd dotnet
-        export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
-        export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
-        gcloud auth activate-service-account pipeline-onboarding@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
+        export GOOGLE_CREDENTIALS=$(cat dotnet/gcp.json | jq -c )
+        export GOOGLE_APPLICATION_CREDENTIALS=dotnet/gcp.json
+        gcloud auth activate-service-account pipeline-onboarding@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=dotnet/gcp.json
         gcloud config set project toolbox-sandbox-388523
         gcloud auth configure-docker
