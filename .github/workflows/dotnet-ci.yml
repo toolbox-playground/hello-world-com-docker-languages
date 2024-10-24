@@ -15,26 +15,36 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up .NET 8
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Install dependencies
+      run: dotnet restore ./dotnet
+
+    - name: Build .NET project
+      run: dotnet build --configuration Release ./dotnet
+
+    - name: Publish .NET project
+      run: dotnet publish --configuration Release --output ./dotnet/publish ./dotnet
+
+    - name: Executar o GitLeaks com Docker  
+      run: ls ${{ github.workspace }}/dotnet
+        
+    - name: Executar o GitLeaks com Docker  
+      run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path/dotnet" -v 
+        
     - name: Build Docker image
       run: |
         cd dotnet
-        docker build -t gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} .
+        docker build -t dotnet-ci-cd .
 
-    - name: Installing Google Cloud
+    - name: Install Trivy
       run: |
-        apt-get update && apt-get install -y curl python3 python3.8-venv python3-dev python3-pip
-        curl https://sdk.cloud.google.com | bash
-        PATH=$PATH:/root/google-cloud-sdk/bin
-
-    - name: Installing Google Cloud and setting credentials
-      working-directory: dotnet  # Ensure you are in the right directory
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+        sudo mv ./bin/trivy /usr/local/bin/trivy  # Move Trivy to a location in the PATH
+  
+    - name: Run Trivy to scan Docker image for vulnerabilities
       run: |
-          echo $GCP_JSON > gcp.json
-          export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
-          export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
-          gcloud auth activate-service-account pipeline-iac@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
-          gcloud config set project toolbox-sandbox-388523
-          gcloud auth configure-docker
-          docker push gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} 
-      env:
-        GCP_JSON: ${{ secrets.GCP_JSON }}
+        trivy image dotnet-ci-cd
