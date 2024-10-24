@@ -54,8 +54,8 @@ jobs:
           gcloud config set project toolbox-sandbox-388523
           gcloud auth configure-docker
           docker push gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }}
-          gcloud run deploy dotnet-test --region=us-central1 --port=5000 --image=gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} 
-          gcloud run services add-iam-policy-binding flask-app --region=us-central1 --platform managed --member="allUsers" --role="roles/run.invoker"
+          gcloud run deploy dotnet-test --region=us-central1 --port=8080 --image=gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} 
+          gcloud run services add-iam-policy-binding dotnet-test --region=us-central1 --platform managed --member="allUsers" --role="roles/run.invoker"
       env:
         GCP_JSON: ${{ secrets.GCP_JSON }}
 
