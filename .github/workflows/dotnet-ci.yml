@@ -29,13 +29,8 @@ jobs:
     - name: Publish .NET project
       run: dotnet publish --configuration Release --output ./dotnet/publish ./dotnet
 
-    - name: Run TruffleHog to scan for secrets
-      run: |
-        # Extract the branch name from GITHUB_REF
-        BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})
-
-        pip install truffleHog
-        trufflehog github --repo=$BRANCH_NAME
+    - name: Executar o GitLeaks com Docker  
+      run: docker run -v ${{ github.workspace }}:/dotnet ghcr.io/gitleaks/gitleaks:latest detect --source="/dotnet" -v 
         
     - name: Build Docker image
       run: |
