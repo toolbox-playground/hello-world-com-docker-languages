@@ -1,6 +1,6 @@
 {
   "name": "hello-world-com-docker-languages",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "![Toolbox Playground](img/toolbox-playground.png)",
   "main": "index.js",
   "scripts": {
