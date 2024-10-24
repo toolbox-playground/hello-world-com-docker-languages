@@ -32,7 +32,7 @@ jobs:
     - name: Run TruffleHog to scan for secrets
       run: |
         pip install truffleHog
-        trufflehog filesystem --directory=./dotnet
+        trufflehog filesystem ./dotnet
 
     - name: Build Docker image
       run: |
