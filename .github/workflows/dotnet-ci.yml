@@ -30,7 +30,10 @@ jobs:
       run: dotnet publish --configuration Release --output ./dotnet/publish ./dotnet
 
     - name: Executar o GitLeaks com Docker  
-      run: docker run -v ${{ github.workspace }}:/dotnet ghcr.io/gitleaks/gitleaks:latest detect --source="/dotnet" -v 
+      run: ls ${{ github.workspace }}/dotnet
+        
+    - name: Executar o GitLeaks com Docker  
+      run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path/dotnet" -v 
         
     - name: Build Docker image
       run: |
