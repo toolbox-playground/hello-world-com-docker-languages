@@ -25,7 +25,7 @@ jobs:
       run: |
           cd dotnet
           echo ${{ secrets.GCP_JSON }} > gcp.json
-          export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
+          export GOOGLE_CREDENTIALS=$(cat gcp.json)
           export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
           echo "GOOGLE_CREDENTIALS: $GOOGLE_CREDENTIALS"
           echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
