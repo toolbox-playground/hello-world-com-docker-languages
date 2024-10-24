@@ -1,7 +1,7 @@
 name: Dotnet CD
 
 on:
-  main:
+  push:
     branches:
       - main
     paths:
