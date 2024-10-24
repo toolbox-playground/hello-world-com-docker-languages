@@ -38,7 +38,7 @@ jobs:
         REPO_URL="https://github.com/${{ github.repository }}/tree/$BRANCH_NAME"
         
         pip install truffleHog
-        trufflehog git REPO_URL
+        trufflehog git $REPO_URL
 
     - name: Build Docker image
       run: |
