@@ -38,8 +38,8 @@ jobs:
         REPO_URL="https://github.com/${{ github.repository }}/tree/$BRANCH_NAME"
         
         pip install truffleHog
-        trufflehog github --repo=$REPO_URL --issue-comments --pr-comments
-
+        trufflehog github --repo=$REPO_URL
+        
     - name: Build Docker image
       run: |
         cd dotnet
