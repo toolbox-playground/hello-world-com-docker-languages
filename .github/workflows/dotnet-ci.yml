@@ -27,9 +27,7 @@ jobs:
           echo $GCP_JSON > gcp.json
           export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
           export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
-          echo "GOOGLE_CREDENTIALS: $GOOGLE_CREDENTIALS"
-          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
-          gcloud auth activate-service-account pipeline-onboarding@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
+          gcloud auth activate-service-account pipeline-iac@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
           gcloud config set project toolbox-sandbox-388523
           gcloud auth configure-docker
       env:
