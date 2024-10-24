@@ -43,12 +43,12 @@ jobs:
           gcloud config set project toolbox-sandbox-388523
           gcloud auth configure-docker
           docker push gcr.io/toolbox-sandbox-388523/nodejs-ci-cd:1.0.${{ github.run_id }}
-          gcloud run deploy nodejs-test --region=us-central1 --port=5000 --image=gcr.io/toolbox-sandbox-388523/nodejs-ci-cd:1.0.${{ github.run_id }} 
-          gcloud run services add-iam-policy-binding flask-app --region=us-central1 --platform managed --member="allUsers" --role="roles/run.invoker"
+          gcloud run deploy nodejs-test --region=us-central1 --port=8080 --image=gcr.io/toolbox-sandbox-388523/nodejs-ci-cd:1.0.${{ github.run_id }} 
+          gcloud run services add-iam-policy-binding nodejs-test --region=us-central1 --platform managed --member="allUsers" --role="roles/run.invoker"
       env:
         GCP_JSON: ${{ secrets.GCP_JSON }}
 
-  gcp:
+  versioning:
       name: versioning
       runs-on: ubuntu-latest
       needs: build
