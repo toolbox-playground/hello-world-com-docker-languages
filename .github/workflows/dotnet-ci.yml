@@ -25,10 +25,14 @@ jobs:
       run: |
           cd dotnet
           echo $GCP_JSON > gcp.json
-          cat gcp.json | jq -c
+          cat <<EOF > gcp.json
+          $GCP_JSON
+          EOF
           export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
           export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
-
+      env:
+        GCP_JSON: ${{ secrets.GCP_JSON }}
+  
     - name: Auth with Google Cloud (in correct directory)
       working-directory: dotnet  # Ensure you are in the right directory
       run: |
