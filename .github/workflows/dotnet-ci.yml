@@ -54,10 +54,14 @@ jobs:
         apt-get update && apt-get install -y curl python3 python3.8-venv python3-dev python3-pip
         curl https://sdk.cloud.google.com | bash
         PATH=$PATH:/root/google-cloud-sdk/bin
+        echo $GCP_JSON > gcp.json
 
     - name: Installing Google Cloud
       run: |
-        echo $GCP_JSON > gcp.json
+        ls
+        
+    - name: Installing Google Cloud
+      run: |
         export GOOGLE_CREDENTIALS=$(cat gcp.json | jq -c )
         export GOOGLE_APPLICATION_CREDENTIALS=gcp.json
 
