@@ -15,6 +15,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Build Docker image
+      run: |
+        cd dotnet
+        docker build -t gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} .
+
     - name: Installing Google Cloud
       run: |
         apt-get update && apt-get install -y curl python3 python3.8-venv python3-dev python3-pip
@@ -30,5 +35,6 @@ jobs:
           gcloud auth activate-service-account pipeline-iac@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
           gcloud config set project toolbox-sandbox-388523
           gcloud auth configure-docker
+          docker push gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} 
       env:
         GCP_JSON: ${{ secrets.GCP_JSON }}
