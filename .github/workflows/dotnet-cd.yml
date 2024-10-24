@@ -4,6 +4,12 @@ on:
   push:
     paths:
       - 'dotnet/**'
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:  
+
 
 jobs:
   build:
