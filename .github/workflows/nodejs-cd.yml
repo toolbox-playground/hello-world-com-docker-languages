@@ -2,8 +2,6 @@ name: Dotnet CD
 
 on:
   push:
-    branches:
-      - main
     paths:
       - 'nodejs/**'
 
