@@ -49,7 +49,9 @@ jobs:
           gcloud auth activate-service-account pipeline-iac@toolbox-sandbox-388523.iam.gserviceaccount.com --key-file=gcp.json
           gcloud config set project toolbox-sandbox-388523
           gcloud auth configure-docker
-          docker push gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} 
+          docker push gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }}
+          gcloud run deploy dotnet-test --region=us-central1 --port=5000 --image=gcr.io/toolbox-sandbox-388523/dotnet-ci-cd:1.0.${{ github.run_id }} 
+          gcloud run services add-iam-policy-binding flask-app --region=us-central1 --platform managed --member="allUsers" --role="roles/run.invoker"
       env:
         GCP_JSON: ${{ secrets.GCP_JSON }}
 
