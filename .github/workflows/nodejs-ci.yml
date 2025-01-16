@@ -6,6 +6,16 @@ on:
       - main
     paths:
       - 'nodejs/**'
+  workflow_dispatch:
+      inputs:
+        scan_vulnerabilities:
+          description: 'Run security scans (yes/no)'
+          required: false
+          default: 'yes'
+        custom_docker_tag:
+          description: 'Custom Docker image tag'
+          required: false
+          default: 'nodejs-ci-cd'
 
 jobs:
   build:
