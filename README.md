@@ -79,4 +79,4 @@ Contribuições são bem-vindas! Por favor, leia o arquivo [CONTRIBUTING.md](CON
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
+Este projeto está licenciado sob a Licença MIT! - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
