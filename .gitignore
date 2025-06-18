@@ -1,8 +1,14 @@
 nodejs/node_modules/
 python/venv/
 *.sln
-
-node_modules/*
+.swp 
+.swo 
+.idea/ 
+.vscode/
+node_modules/
+# Arquivos de log comuns
+*.log
+*.log.*
 
 #Arquivos Windows
 # Windows thumbnail cache files
