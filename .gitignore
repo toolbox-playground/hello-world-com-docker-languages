@@ -5,7 +5,6 @@ python/venv/
 .swo 
 .idea/ 
 .vscode/
-node_modules/
 # Arquivos de log comuns
 *.log
 *.log.*
