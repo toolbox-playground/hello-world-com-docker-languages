@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  hello-world-python:
+    build: .
+    container_name: hello-world-python
+    ports:
+      - "5001:5000"
+    restart: unless-stopped
+
+  supermario:
+    image: pengbai/docker-supermario
+    container_name: supermario-game
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
